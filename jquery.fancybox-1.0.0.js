@@ -125,8 +125,10 @@
         imgRegExp = new RegExp('\.' + imgRegExp + '$', 'i');
 
         var url = opts.itemArray[n].url;
-
-        if (url.match(/#/)) {
+        if (!url) {
+            $.fn.fancybox.showItem('<div id="fancy_div">' + opts.settings.content + '</div>');
+            $("#fancy_loading").hide();
+        } else if (url.match(/#/)) {
             var target = window.location.href.split('#')[0]; target = url.replace(target,'');
 
             $.fn.fancybox.showItem('<div id="fancy_div">' + $(target).html() + '</div>');
@@ -445,6 +447,7 @@
         showLoading:        true,
         random:             true,
         followBrowserSize:  false,
-        inline:             false
+        inline:             false,
+        content:            null 
     };
 })(jQuery);
