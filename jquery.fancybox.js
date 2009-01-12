@@ -1,10 +1,12 @@
 /*
- * FancyBox - simple jQuery plugin for fancy image zooming
+ * FancyBox (The Schiller Remix) - simple jQuery plugin for fancy image zooming
  * Examples and documentation at: http://fancy.klade.lv/
- * Version: 1.0.0 (29/04/2008)
- * Copyright (c) 2008 Janis Skarnelis
+ * Version: 0.1 (12/01/2009)
+ * Original Code Copyright (c) 2008 Janis Skarnelis
+ * Refactored Code Copyright (c) 2009 Joel Courtney
  * Licensed under the MIT License: http://www.opensource.org/licenses/mit-license.php
- * Requires: jQuery v1.2.1 or later
+ * Requires: jQuery v1.2.1 or later, pngFix ( http://jquery.andreaseberhard.de/pngFix/ )
+ * Uses Scott Schiller Even More Rounded Corners ( http://www.schillmania.com/projects/dialog2/ )
 */
 (function($) {
     var imgPreloader = new Image, imgTypes = ['png', 'jpg', 'jpeg', 'gif'], loadingTimer, loadingFrame = 1;
@@ -377,7 +379,9 @@
                 $("#fancy_inner").prepend('<iframe id="fancy_freeIframe" scrolling="no" frameborder="0"></iframe>');
             }
 
-            if (jQuery.fn.pngFix) $(document).pngFix();
+            if (jQuery.fn.pngFix) {
+				$("#fancy_wrap").pngFix();
+			}
         };
 
         var getPosition = function(el) {
