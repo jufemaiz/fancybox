@@ -119,6 +119,7 @@
                     }
 
                     opts.itemArray.push(item);
+					opts.itemNum = opts.itemArray.length - 1;
 
                 } else {
                     var arr = $("a[@rel=" + el.rel + "]").get();
@@ -153,7 +154,7 @@
             var itemSize    = getMaxSize(viewportPos[0] - 50, viewportPos[1] - 100, opts.itemArray[opts.itemNum].o.frameWidth, opts.itemArray[opts.itemNum].o.frameHeight);
 
             var itemLeft    = viewportPos[2] + Math.round((viewportPos[0] - itemSize[0]) / 2) - 20;
-            var itemTop     = viewportPos[3] + Math.round((viewportPos[1] - itemSize[1]) / 2) - 40;
+            var itemTop     = viewportPos[3] + Math.round((viewportPos[1] - itemSize[1]) / 2) - 100;
 
             var itemOpts = {
                 'left':     itemLeft, 
@@ -214,7 +215,7 @@
             var itemSize    = getMaxSize(viewportPos[0] - 50, viewportPos[1] - 100, opts.itemArray[opts.itemNum].o.frameWidth, opts.itemArray[opts.itemNum].o.frameHeight);
 
             var itemLeft    = viewportPos[2] + Math.round((viewportPos[0] - itemSize[0]) / 2) - 20;
-            var itemTop     = viewportPos[3] + Math.round((viewportPos[1] - itemSize[1]) / 2) - 40;
+            var itemTop     = viewportPos[3] + Math.round((viewportPos[1] - itemSize[1]) / 2) - 100;
 
             var itemOpts = {
                 'left':     itemLeft, 
@@ -241,8 +242,11 @@
             }
 
             if (opts.itemArray[opts.itemNum].title !== undefined && opts.itemArray[opts.itemNum].title !== '') {
-                $('#fancy_title div').html(opts.itemArray[opts.itemNum].title);
+                $('#fancy_title div.fancy_copy').html(opts.itemArray[opts.itemNum].title);
+				$('#fancy_title .fancy_dialog').css({'margin' : '0 auto', 'width' : "100%"})
                 $('#fancy_title').show();
+				$('#fancy_title .fancy_dialog').css({'margin' : '0 auto', 'width' : ($('div#fancy_title .fancy_copy').width()+14)+"px"})
+				$('#fancy_title').css({'bottom' : "-"+($('#fancy_title').height() + 10)+"px"});
             }
 
             $("#fancy_content").unbind('click');
@@ -341,7 +345,7 @@
 
             var pos = getViewport();
 
-            $("#fancy_loading").css({'left': ((pos[0] - 40) / 2 + pos[2]), 'top': ((pos[1] - 40) / 2 + pos[3])}).show();
+            $("#fancy_loading").css({'left': ((pos[0] - 100) / 2 + pos[2]), 'top': ((pos[1] - 100) / 2 + pos[3])}).show();
             $("#fancy_loading").bind('click', close);
 
             loadingTimer = setInterval(animateLoading, 66);
@@ -366,7 +370,7 @@
                 $('<div id="fancy_loading"><div></div></div><div id="fancy_outer"><div id="fancy_inner"><div id="fancy_nav"></div><div id="fancy_close"></div><div id="fancy_content"></div><div id="fancy_title"></div></div></div>').appendTo("#fancy_wrap");
                 $('<div id="fancy_bg"><div class="fancy_bg fancy_bg_n"></div><div class="fancy_bg fancy_bg_ne"></div><div class="fancy_bg fancy_bg_e"></div><div class="fancy_bg fancy_bg_se"></div><div class="fancy_bg fancy_bg_s"></div><div class="fancy_bg fancy_bg_sw"></div><div class="fancy_bg fancy_bg_w"></div><div class="fancy_bg fancy_bg_nw"></div></div>').prependTo("#fancy_inner");
 
-                $('<table cellspacing="0" cellpadding="0" border="0"><tr><td id="fancy_title_left"></td><td id="fancy_title_main"><div></div></td><td id="fancy_title_right"></td></tr></table>').appendTo('#fancy_title');
+                $('<div class="fancy_dialog"><div class="fancy_content"><div class="fancy_t"></div><!--Your content goes here--><div class="fancy_copy"></div></div><div class="fancy_b"><div></div></div></div>').appendTo('#fancy_title');
             }
 
             if ($.browser.msie) {
