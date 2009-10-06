@@ -124,7 +124,7 @@
 					opts.itemNum = opts.itemArray.length - 1;
 
                 } else {
-                    var arr = $("a[@rel=" + el.rel + "]").get();
+                    var arr = $("a[rel=" + el.rel + "]").get();
 
                     for (var i = 0; i < arr.length; i++) {
                         var item    = {url: arr[i].href, title: arr[i].title, o: o};
